@@ -10,6 +10,7 @@ services:
       - "${REDISPORT}:${REDISPORT}"
       - "${DASHBOARDPORT}:${DASHBOARDPORT}"
       - "${HEADNODEPORT}:${HEADNODEPORT}"
+    container_name: ray-head-svc
     env_file:
       - .env
     command: bash -c "ray start --head --dashboard-port=${DASHBOARDPORT} --port=${REDISPORT} --dashboard-host=0.0.0.0 --redis-password=${REDISPASSWORD} --block"
@@ -29,6 +30,7 @@ services:
       dockerfile: Dockerfile
     depends_on: 
       - ray-head
+    container_name: ray-worker-svc
     env_file:
       - .env
     command: bash -c "ray start --address=ray-head:${REDISPORT} --redis-password=${REDISPASSWORD} --num-cpus=${NUM_CPU_WORKER} --block" 
