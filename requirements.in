@@ -1,0 +1,9 @@
+torch
+torchvision
+torchmetrics
+opencv-python
+transformers
+pyarrow
+ray
+ray[train]
+ray[tune]
