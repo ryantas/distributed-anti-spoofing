@@ -2,7 +2,10 @@ version: "3"
 
 services:
   ray-head:
-    image: ${RAY_IMAGE}
+    # image: ${RAY_IMAGE}
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "${REDISPORT}:${REDISPORT}"
       - "${DASHBOARDPORT}:${DASHBOARDPORT}"
@@ -20,7 +23,10 @@ services:
       - ray_net
 
   ray-worker:
-    image: ${RAY_IMAGE}
+    # image: ${RAY_IMAGE}
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on: 
       - ray-head
     env_file:
